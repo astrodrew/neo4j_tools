@@ -1,15 +1,15 @@
-import csv ÃüÁî
-./neo4j-import   --multiline-fields=true --bad-tolerance=1000000 --into /home/ubuntu/neo4jdata/databases/graph.db --id-type string --nodes:ÉùÒô voice.csv --nodes:×¨¼­ resource.csv  --relationships:°üº¬ relation.csv 
+import csv å‘½ä»¤
+./neo4j-import   --multiline-fields=true --bad-tolerance=1000000 --into /home/ubuntu/neo4jdata/databases/graph.db --id-type string --nodes:å£°éŸ³ voice.csv --nodes:ä¸“è¾‘ resource.csv  --relationships:åŒ…å« relation.csv 
 
 
 
-unwind Ğ´·¨(java)
+unwind å†™æ³•(java)
 
 Map<String, Object> map = new HashMap<String, Object>();
-map.put("ÊµÌåÃû", matcher.group(1));
+map.put("å®ä½“å", matcher.group(1));
 map.put("id", matcher.group(2));
-map.put("ÊÕÌıÊı", matcher.group(3));
-map.put("·¢²¼Ê±¼ä", matcher.group(4));
+map.put("æ”¶å¬æ•°", matcher.group(3));
+map.put("å‘å¸ƒæ—¶é—´", matcher.group(4));
 rows.add(map);
 i++;
 if(i % 100 == 0){
@@ -17,7 +17,12 @@ if(i % 100 == 0){
 	paramMap.put("rows",rows);
 	System.out.println(rows);
 	System.out.println(i);
-	String query  =  String.format("UNWIND $rows As row\nMERGE(n:%s) SET n = row","ÉùÒô");
+	String query  =  String.format("UNWIND $rows As row\nMERGE(n:%s) SET n = row","å£°éŸ³");
 	session.run(query,paramMap);
 	rows.clear();
 }
+
+
+åˆ›å»ºç´¢å¼•
+	CREATE INDEX ON :æ ‡ç­¾(id)
+	
